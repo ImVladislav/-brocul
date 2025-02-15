@@ -58,9 +58,16 @@
           <a target="_blank" class="flex items-center gap-3" href="https://t.me/TrampDogSol"><img alt="telegram" src="_next/static/media/telegram.925c8836.png" width="41"><span class="social-text">telegram</span></a><a target="_blank" class="flex items-center gap-3" href="https://dexscreener.com/solana/6vw6djkrgtwby5cemnpqnmlkkwpnufnfevpmpbhkk3e9
           "><img alt="chart" src="_next/static/media/chart.025ee953.png" width="41"><span class="social-text">dexscreener</span></a><a target="_blank" class="flex items-center gap-3" href="https://x.com/TrampDogSol"><img alt="twitter" src="_next/static/media/x.cae2ecb8.png" width="41"><span class="social-text">twitter</span></a>
         </div>
-        <div class="flex items-center justify-center flex-wrap code px-5 w-[354px] lg:w-[565px]">
-          CA: BDhG1uomUWxU2AGbJ7pmXVeYPSkng34toBdgx2Vtrmp
-        </div>
+<!-- Модальне вікно (спочатку приховане) -->
+<div id="copy-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+  <div class="bg-[#1a5bb3] text-white text-[20px] font-bold px-6 py-4 rounded-lg shadow-lg text-center">
+      <p class="about-des">✅ Contract copied!</p>
+  </div>
+</div>
+        <div id="contract-container" class="flex items-center justify-center flex-wrap code px-5 w-[354px] lg:w-[565px]" style="cursor: pointer;">
+          CA: <span id="contract-text">BDhG1uomUWxU2AGbJ7pmXVeYPSkng34toBdgx2Vtrmp</span>
+      </div>
+      
       </div>
       <div class="w-full bg-[#e5e5e5] py-20" id="about">
         <div class="max-w-[1280px] grid grid-cols-1 lg:grid-cols-2 items-center gap-14 mx-auto w-full">
@@ -250,6 +257,40 @@
         musicButton.style.display = 'block';
       }
     </script>
+
+    <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    const contractContainer = document.getElementById("contract-container");
+    const contractText = document.getElementById("contract-text").innerText;
+    const copyModal = document.getElementById("copy-modal");
+
+    if (!contractContainer || !copyModal) {
+        console.error("❌ Елемент контракту або модальне вікно не знайдено!");
+        return;
+    }
+
+    // Функція копіювання тексту контракту
+    contractContainer.addEventListener("click", function () {
+        navigator.clipboard.writeText(contractText).then(() => {
+            console.log("✅ Контракт скопійовано: " + contractText);
+            
+            // Показати модальне вікно
+            copyModal.classList.remove("hidden");
+
+            // Приховати через 2 секунди
+            setTimeout(() => {
+                copyModal.classList.add("hidden");
+            }, 2000);
+        }).catch(err => console.error("❌ Помилка копіювання:", err));
+    });
+});
+
+
+    </script>
+
+
+
     <script>
       self.__next_f.push([
         1,
